@@ -45,8 +45,8 @@ export default class App extends React.Component {
           <View style={styles.container}>
             <Text style={styles.header}>Your Decks</Text>
             {this.state.decks.map( deck => (
-              <View>
-                <Text>I am a card</Text>
+              <View style={styles.card}>
+                <Text>{deck.title}</Text>
               </View>
             ))}
           </View>

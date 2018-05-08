@@ -1,8 +1,9 @@
 import React from 'react'
-import { StyleSheet, StatusBar, Text, View, FlatList } from 'react-native'
+import { StyleSheet, StatusBar, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { Constants } from 'expo'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import AddDeck from './components/AddDeck'
+import DeckSummary from './components/DeckSummary'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 
 
@@ -95,10 +96,14 @@ class DeckList extends React.Component {
           style={{width: '90%'}}
           data={this.state.decks}
           renderItem={({item}) => 
+            
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('DeckSummary')}>
             <View style={styles.card}>
-              <Text style={{fontSize: 25, textAlign: 'center', color: '#fff'}}>{item.title}</Text>
-              <Text style={{fontSize: 15, textAlign: 'center', color: '#fff'}}>{item.questions.length} cards</Text>
-            </View>}
+                <Text style={{fontSize: 25, textAlign: 'center', color: '#fff'}}>{item.title}</Text>
+                <Text style={{fontSize: 15, textAlign: 'center', color: '#fff'}}>{item.questions.length} cards</Text>
+            </View>
+            </TouchableOpacity>
+          }
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
         />
@@ -138,6 +143,9 @@ const DeckStack = StackNavigator({
     navigationOptions: {
       title: 'Your decks'
     }
+  },
+  DeckSummary: {
+    screen: DeckSummary,
   }
 })
 

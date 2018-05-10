@@ -4,138 +4,33 @@ import { Constants } from 'expo'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import AddDeck from './components/AddDeck'
 import DeckSummary from './components/DeckSummary'
+import DeckList from './components/DeckList'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from './reducers'
+
+const store = createStore(
+  rootReducer, /* preloadedState, */
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 
-class DeckList extends React.Component {
-
-  state = {
-      decks: [
-        {
-          title: 'Deck 1',
-          questions: [
-            {
-              question: 'What is React?',
-              answer: 'A library for managing user interfaces'
-            },
-            {
-              question: 'Where do you make Ajax requests in React?',
-              answer: 'The componentDidMount lifecycle event'
-            }
-          ]
-        },
-        {
-          title: 'Deck 2',
-          questions: [
-            {
-              question: 'What is React?',
-              answer: 'A library for managing user interfaces'
-            },
-            {
-              question: 'Where do you make Ajax requests in React?',
-              answer: 'The componentDidMount lifecycle event'
-            }
-          ]
-        },
-        {
-          title: 'Deck 3',
-          questions: [
-            {
-              question: 'What is React?',
-              answer: 'A library for managing user interfaces'
-            },
-            {
-              question: 'Where do you make Ajax requests in React?',
-              answer: 'The componentDidMount lifecycle event'
-            }
-          ]
-        },
-        {
-          title: 'Deck 4',
-          questions: [
-            {
-              question: 'What is React?',
-              answer: 'A library for managing user interfaces'
-            },
-            {
-              question: 'Where do you make Ajax requests in React?',
-              answer: 'The componentDidMount lifecycle event'
-            }
-          ]
-        },
-        {
-          title: 'Deck 5',
-          questions: [
-            {
-              question: 'What is Angular?',
-              answer: 'Something other than React'
-            },
-            {
-              question: 'What is Angular?',
-              answer: 'Something other than React'
-            },
-            {
-              question: 'Where do you get the best coffee?',
-              answer: 'At home'
-            }
-          ]
-        }
-      ]
-    }
-
-    
-
-
-
-
+export default class App extends React.Component {
+  
   render() {
       return(
+        <Provider store={store}>
+          <Tabs />
+        </Provider>
 
-      <View style={styles.container}>
-        <FlatList
-          style={{width: '90%'}}
-          data={this.state.decks}
-          renderItem={({item}) => 
-            
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('DeckSummary')}>
-            <View style={styles.card}>
-                <Text style={{fontSize: 25, textAlign: 'center', color: '#fff'}}>{item.title}</Text>
-                <Text style={{fontSize: 15, textAlign: 'center', color: '#fff'}}>{item.questions.length} cards</Text>
-            </View>
-            </TouchableOpacity>
-          }
-          keyExtractor={(item, index) => index.toString()}
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
+      
       )
   }
 
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  header: {
-    fontSize: 30,
-    paddingBottom: 20
-  },
-  card: {
-    backgroundColor: '#4286f4',
-    width: '100%',
-    marginBottom: 10,
-    marginTop: 10,
-    padding: 40,
-    borderRadius: 10
-  }
-});
 
-const blue = '#4286f4'
-const grey = '#808080'
 
 const DeckStack = StackNavigator({
   Decks: { 
@@ -150,7 +45,7 @@ const DeckStack = StackNavigator({
 })
 
 
-export default TabNavigator(
+const Tabs = TabNavigator(
   {
     Decks: {
       screen: DeckStack,
@@ -175,3 +70,5 @@ export default TabNavigator(
   }
 );
 
+const blue = '#4286f4'
+const grey = '#808080'

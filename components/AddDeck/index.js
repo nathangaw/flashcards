@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, StatusBar, Text, View, FlatList, TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
-import { saveDeckTitle } from '../../actions'
+import { saveDeckTitleToStorage } from '../../actions'
 
 
 class AddDeck extends React.Component {
@@ -22,7 +22,7 @@ class AddDeck extends React.Component {
             />
             <Button
                 onPress={() => {
-                this.props.saveDeckTitle(this.state.input)
+                this.props.saveDeckTitleToStorage(this.state.input)
                 }}
                 title='Submit'
             />             
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        saveDeckTitle: (title) => dispatch(saveDeckTitle(title))
+        saveDeckTitleToStorage: (title) => dispatch(saveDeckTitleToStorage(title))
     };
   };
 

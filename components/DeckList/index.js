@@ -3,8 +3,16 @@ import { StyleSheet, StatusBar, Text, View, FlatList, TouchableOpacity } from 'r
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import { connect } from 'react-redux'
+import { getDecksFromStorage, deleteAllDecksFromStorage } from '../../actions'
+
+
+
 
 class DeckList extends React.Component {
+
+    componentDidMount() {
+      this.props.getDecksFromStorage()
+    }
     
     render() {
         return(
@@ -25,6 +33,9 @@ class DeckList extends React.Component {
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
           />
+          <TouchableOpacity onPress={() => this.props.deleteAllDecksFromStorage()}>
+            <Text>DELETE ALL</Text>
+          </TouchableOpacity>
         </View>
         )
     }
@@ -61,8 +72,15 @@ class DeckList extends React.Component {
     };
   };
 
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      getDecksFromStorage: () => dispatch(getDecksFromStorage()),
+      deleteAllDecksFromStorage: () => dispatch(deleteAllDecksFromStorage())
+    }
+  }
 
-export default connect(mapStateToProps)(DeckList);
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
   
   
   

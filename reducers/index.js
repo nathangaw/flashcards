@@ -75,8 +75,12 @@ const initialState = [
 
 
 
-export function decks (state = initialState, action) {
+export function decks (state = [], action) {
     switch (action.type) {
+        case 'GET_DECKS':
+            return action.decks
+        case 'DELETE_DECKS':
+            return action.decks
         case 'SAVE_DECK_TITLE':
             return [...state, {
                 title: action.title,
@@ -86,6 +90,15 @@ export function decks (state = initialState, action) {
             return state;
     }
 }
+
+
+
+
+
+
+
+
+
 
 export default combineReducers({
     decks

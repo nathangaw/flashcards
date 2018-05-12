@@ -31,15 +31,26 @@ export function deleteDecks() {
 
 /* updating async storage */
 
-export const FLASHCARDS_STORAGE_KEY = 'Flashcards: decks'
+export const FLASHCARDS_STORAGE_KEY = 'FLASHCARDS_STORAGE_KEY'
 
-let initialData = [
+let initialData = {
+	title: 'Deck 1',
+	questions: [
+		{
+		question: 'What is React?',
+		answer: 'A library for managing user interfaces'
+		},
+		{
+		question: 'Where do you make Ajax requests in React?',
+		answer: 'The componentDidMount lifecycle event'
+		}
+	]
+	}
 	
-]
+
 
 
 function initialiseStorage() {
-	
 		AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(initialData))
 		return initialData
 	}
@@ -71,9 +82,7 @@ export function saveDeckTitleToStorage(title) {
 		}
 
 		return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
-			newDeck
+			[title]: newDeck
 		}))
-
 	}
-		
 }

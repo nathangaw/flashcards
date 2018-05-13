@@ -75,7 +75,9 @@ export function deleteAllDecksFromStorage() {
 
 
 export function saveDeckTitleToStorage(title) {
+
 	return(dispatch) => {
+		
 		const newDeck = {
 			title: title,
 			questions: []

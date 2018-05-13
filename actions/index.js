@@ -31,21 +31,36 @@ export function deleteDecks() {
 
 /* updating async storage */
 
-export const FLASHCARDS_STORAGE_KEY = 'FLASHCARDS_STORAGE_KEY'
+export const FLASHCARDS_STORAGE_KEY = 'FlashcardArray'
 
-let initialData = {
-	title: 'Deck 1',
-	questions: [
-		{
-		question: 'What is React?',
-		answer: 'A library for managing user interfaces'
-		},
-		{
-		question: 'Where do you make Ajax requests in React?',
-		answer: 'The componentDidMount lifecycle event'
-		}
-	]
+let initialData = [
+	{
+		title: 'Deck 1',
+		questions: [
+			{
+			question: 'What is React?',
+			answer: 'A library for managing user interfaces'
+			},
+			{
+			question: 'Where do you make Ajax requests in React?',
+			answer: 'The componentDidMount lifecycle event'
+			}
+		]
+	},
+	{
+		title: 'Deck 2',
+		questions: [
+			{
+			question: 'What is React?',
+			answer: 'A library for managing user interfaces'
+			},
+			{
+			question: 'Where do you make Ajax requests in React?',
+			answer: 'The componentDidMount lifecycle event'
+			}
+		]
 	}
+]	
 	
 
 
@@ -74,17 +89,20 @@ export function deleteAllDecksFromStorage() {
 }
 
 
-export function saveDeckTitleToStorage(title) {
+export function saveDeckTitleToStorage(decks, title) {
 
 	return(dispatch) => {
 		
-		const newDeck = {
+		const newDeck = [
+			{
 			title: title,
 			questions: []
-		}
+			}
+		]
 
-		return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
-			[title]: newDeck
-		}))
+		let updatedDecks = [...decks, ...newDeck]
+
+		AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(updatedDecks))
+		
 	}
 }

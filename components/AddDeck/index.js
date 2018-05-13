@@ -17,12 +17,12 @@ class AddDeck extends React.Component {
           
             <TextInput 
                 style={{width: '90%', height: 40, borderColor: 'gray', borderWidth: 1, textAlign: 'center'}}
-                onChangeText={(input) => this.setState({input})}
+                onChangeText={(input) => this.setState({input: input})}
                 value={this.state.input}
             />
             <Button
                 onPress={() => {
-                this.props.saveDeckTitleToStorage(this.state.input)
+                this.props.saveDeckTitleToStorage(this.props.decks, this.state.input)
                 }}
                 title='Submit'
             />             
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        saveDeckTitleToStorage: (title) => dispatch(saveDeckTitleToStorage(title))
+        saveDeckTitleToStorage: (decks, title) => dispatch(saveDeckTitleToStorage(decks, title))
     };
   };
 

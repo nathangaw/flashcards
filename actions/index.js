@@ -103,6 +103,7 @@ export function saveDeckTitleToStorage(decks, title) {
 		let updatedDecks = [...decks, ...newDeck]
 
 		AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(updatedDecks))
+		.then(() => dispatch(getDecks(updatedDecks)))
 		
 	}
 }

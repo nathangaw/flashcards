@@ -111,13 +111,18 @@ export function saveCardToStorage(deckTitle, newQuestion, newAnswer, currentDeck
 
 		let changedDeck = currentDecks.filter(deck => deck.title == deckTitle)
 		changedDeck[0].questions.push(newCard)
+		
 		let unchangedDecks = currentDecks.filter(deck => deck.title != deckTitle)
 		let updatedDecks = [...changedDeck, ...unchangedDecks]
 
-		console.log(updatedDecks)
-
 		
 		AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(updatedDecks))
+		.then(() => dispatch(getDecks(updatedDecks)))
+
+		
+
+
+
 		.then(() => dispatch(getDecks(updatedDecks)))
 		
 

@@ -20,7 +20,7 @@ export default class DeckSummary extends React.Component {
             <Text style={{color: 'black'}}>{title}</Text>
             <Text>{numberOfQuestions} cards</Text>
             <TouchableOpacity onPress={() => {this.props.navigation.navigate('AddCard', {title: title})}}><Text>Add card</Text></TouchableOpacity>
-            <TouchableOpacity><Text>Start quiz</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => {this.props.navigation.navigate('Quiz', {title: title})}}><Text>Start quiz</Text></TouchableOpacity>
              
             
         </View>

@@ -5,6 +5,8 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 import AddDeck from './components/AddDeck'
 import DeckSummary from './components/DeckSummary'
 import DeckList from './components/DeckList'
+import Deck from './components/Deck'
+import AddCard from './components/AddCard'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
@@ -46,6 +48,15 @@ const DeckStack = StackNavigator({
   },
   DeckSummary: {
     screen: DeckSummary,
+    navigationOptions: {
+      title: 'Deck detail'
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      title: 'Add a card'
+    }
   }
 })
 

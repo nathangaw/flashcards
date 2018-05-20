@@ -1,16 +1,8 @@
 import { AsyncStorage } from 'react-native'
 
-export const SAVE_DECK_TITLE = 'SAVE_DECK_TITLE'
 export const GET_DECKS = 'GET_DECKS'
 export const DELETE_DECKS = 'DELETE_DECKS'
 
-
-export function saveDeckTitle(title) {
-	return {
-		type: 'SAVE_DECK_TITLE',
-		title: title
-	}
-}
 
 export function getDecks(decks) {
 	return {
@@ -105,5 +97,29 @@ export function saveDeckTitleToStorage(decks, title) {
 		AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(updatedDecks))
 		.then(() => dispatch(getDecks(updatedDecks)))
 		
+	}
+}
+
+export function saveCardToStorage(deckTitle, newQuestion, newAnswer, currentDecks) {
+
+	return(dispatch) => {
+
+		const newCard = {
+			question: newQuestion,
+			answer: newAnswer
+		}
+
+		let changedDeck = currentDecks.filter(deck => deck.title == deckTitle)
+		changedDeck[0].questions.push(newCard)
+		let unchangedDecks = currentDecks.filter(deck => deck.title != deckTitle)
+		let updatedDecks = [...changedDeck, ...unchangedDecks]
+
+		console.log(updatedDecks)
+
+		
+		AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(updatedDecks))
+		.then(() => dispatch(getDecks(updatedDecks)))
+		
+
 	}
 }

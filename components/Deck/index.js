@@ -4,48 +4,22 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import { connect } from 'react-redux'
 import { getDecksFromStorage, deleteAllDecksFromStorage } from '../../actions'
-import Deck from '../Deck'
 
 
-class DeckList extends React.Component {
-
-    componentDidMount() {
-      this.props.getDecksFromStorage()
-    }
-    
-
-    _renderItem=({item}) => (
-      
-      <Deck
-        key={item.title}
-        title={item.title}
-        questions={item.questions}
-        navigation={this.props.navigation}
-      />
-    )
-      
-    
-
+class Deck extends React.Component {
 
     render() {
         return(
-    
-        <View style={styles.container}>
-          <FlatList
-            style={{width: '90%'}}
-            data={this.props.decks}
-            renderItem={this._renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            showsVerticalScrollIndicator={false}
-          />
-          <TouchableOpacity onPress={() => this.props.deleteAllDecksFromStorage()}>
-            <Text>DELETE ALL</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity onPress={() => {this.props.navigation.navigate('DeckSummary', {title: this.props.title, questions: this.props.questions})}}>
+                <View style={styles.card}>
+                <Text style={{fontSize: 25, textAlign: 'center', color: '#fff'}}>{this.props.title}</Text>
+                <Text style={{fontSize: 15, textAlign: 'center', color: '#fff'}}>{this.props.questions.length} cards</Text>
+                </View>
+            </TouchableOpacity>
         )
     }
   
-  }
+}
   
   const styles = StyleSheet.create({
     container: {
@@ -85,7 +59,7 @@ class DeckList extends React.Component {
   }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
+export default connect(mapStateToProps, mapDispatchToProps)(Deck);
   
   
   

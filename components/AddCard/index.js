@@ -8,20 +8,28 @@ export class AddCard extends React.Component {
 
     state = {
         newQuestion: '',
-        newAnswer: ''
+        newAnswer: '',
+        title: ''
     }
     
+    componentDidMount() {
+        const title = this.props.navigation.getParam('title', 'Dummy')
+        this.setState({
+            title
+        })
+    }
+
+    submitCard = () => {
+        this.props.saveCardToStorage(this.state.title, this.state.newQuestion, this.state.newAnswer, this.props.decks)
+        this.props.navigation.goBack()
+    }
 
     render() {
-
-        const title = this.props.navigation.getParam('title', 'Dummy')
-        
-
 
         return(
 
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Saving new card to {title} deck</Text>
+            <Text>Saving new card to {this.state.title} deck</Text>
             <TextInput 
                 style={{width: '90%', height: 40, borderColor: 'gray', borderWidth: 1, textAlign: 'center'}}
                 onChangeText={(input) => this.setState({newQuestion: input})}
@@ -34,7 +42,7 @@ export class AddCard extends React.Component {
             />
             <Button
                 onPress={() => {
-                this.props.saveCardToStorage(title, this.state.newQuestion, this.state.newAnswer, this.props.decks)
+                this.submitCard()
                 }}
                 title='Submit'
             />

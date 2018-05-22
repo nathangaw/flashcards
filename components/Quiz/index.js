@@ -70,7 +70,7 @@ export class Quiz extends React.Component {
 
     calculatePercentage = (numberCorrect) => {
         let totalAnswers = this.state.activeQuestions.length
-        let percentage = (numberCorrect/totalAnswers) * 100
+        let percentage = Math.round((numberCorrect/totalAnswers) * 100)
         this.setState({
             percentage
         })

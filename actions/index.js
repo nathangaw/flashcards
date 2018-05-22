@@ -118,12 +118,6 @@ export function saveCardToStorage(deckTitle, newQuestion, newAnswer, currentDeck
 		
 		AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(updatedDecks))
 		.then(() => dispatch(getDecks(updatedDecks)))
-
-		
-
-
-
-		.then(() => dispatch(getDecks(updatedDecks)))
 		
 
 	}

@@ -19,7 +19,7 @@ export class DeckSummary extends React.Component {
             activeDeck,
             title
         })
-        /* issue: activeDeck is empty when navigating from AddDeck */
+        /* issue: decks is available but the new deck has not yet been added to redux state  */
         console.log(this.props.decks)
         console.log(activeDeck)
     }

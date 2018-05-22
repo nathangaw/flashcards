@@ -12,7 +12,7 @@ class AddDeck extends React.Component {
 
     deckSubmit = () => {
         this.props.saveDeckTitleToStorage(this.props.decks, this.state.input)
-        this.props.navigation.navigate('DeckSummary', {title: this.state.input, questions: []})
+        this.props.navigation.navigate('DeckSummary', {title: this.state.input})
     }
     
 

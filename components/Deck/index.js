@@ -10,7 +10,7 @@ class Deck extends React.Component {
 
     render() {
         return(
-            <TouchableOpacity onPress={() => {this.props.navigation.navigate('DeckSummary', {title: this.props.title, questions: this.props.questions})}}>
+            <TouchableOpacity onPress={() => {this.props.navigation.navigate('DeckSummary', {title: this.props.title})}}>
                 <View style={styles.card}>
                 <Text style={{fontSize: 25, textAlign: 'center', color: '#fff'}}>{this.props.title}</Text>
                 <Text style={{fontSize: 15, textAlign: 'center', color: '#fff'}}>{this.props.questions.length} cards</Text>

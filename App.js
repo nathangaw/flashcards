@@ -67,6 +67,15 @@ const DeckStack = StackNavigator({
   }
 })
 
+const addDeckStack = StackNavigator({
+  AddDeck: { 
+    screen: AddDeck,
+    navigationOptions: {
+      title: 'Add Deck'
+    }
+  }
+})
+
 
 const Tabs = TabNavigator(
   {
@@ -78,7 +87,7 @@ const Tabs = TabNavigator(
       }
     },
     AddDeck: {
-      screen: AddDeck,
+      screen: addDeckStack,
       navigationOptions: {
         tabBarLabel: 'Add decks',
         tabBarIcon: ({ tintColor }) => <Ionicons name='ios-add' size={30} color={tintColor} />

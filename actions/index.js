@@ -26,7 +26,7 @@ export function deleteDecks() {
 export const FLASHCARDS_STORAGE_KEY = 'FlashcardArray'
 
 let initialData = [
-	{
+	/*{
 		title: 'Deck 1',
 		questions: [
 			{
@@ -51,7 +51,7 @@ let initialData = [
 			answer: 'The componentDidMount lifecycle event'
 			}
 		]
-	}
+	}*/
 ]	
 	
 

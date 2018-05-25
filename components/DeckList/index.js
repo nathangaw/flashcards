@@ -1,89 +1,86 @@
 import React from 'react'
-import { StyleSheet, StatusBar, Text, View, FlatList, TouchableOpacity } from 'react-native'
-import { TabNavigator, StackNavigator } from 'react-navigation'
-import {FontAwesome, Ionicons} from '@expo/vector-icons'
+import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
 import { connect } from 'react-redux'
-import { getDecksFromStorage, deleteAllDecksFromStorage } from '../../actions'
+import { getDecksFromStorage } from '../../actions'
 import Deck from '../Deck'
 
 
 class DeckList extends React.Component {
 
-    componentDidMount() {
-      this.props.getDecksFromStorage()
-    }
+  componentDidMount() {
+    this.props.getDecksFromStorage()
+  }
+  
+  _renderItem=({item}) => (
+    <Deck
+      key={item.title}
+      title={item.title}
+      questions={item.questions}
+      navigation={this.props.navigation}
+    />
+  )
     
-
-    _renderItem=({item}) => (
+  render() {
       
-      <Deck
-        key={item.title}
-        title={item.title}
-        questions={item.questions}
-        navigation={this.props.navigation}
-      />
-    )
-      
+    if(this.props.decks.length === 0)
     
+      return(
+        <View style={styles.noCardsContainer}>
+        <Text style={{textAlign: 'center', padding: 20}}>You haven't added any decks yet. Hit the button below to get started.</Text>
+        <Button
+                onPress={() => {
+                this.props.navigation.navigate('AddDeck')
+                }}
+                title='Add your first deck'
+            />
 
-
-    render() {
-        return(
-    
-        <View style={styles.container}>
-          <FlatList
-            style={{width: '90%'}}
-            data={this.props.decks}
-            renderItem={this._renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            showsVerticalScrollIndicator={false}
-          />
-          <TouchableOpacity onPress={() => this.props.deleteAllDecksFromStorage()}>
-            <Text>DELETE ALL</Text>
-          </TouchableOpacity>
         </View>
-        )
-    }
-  
+      )
+      
+      return(
+
+      <View style={styles.container}>
+        <FlatList
+          style={{width: '90%'}}
+          data={this.props.decks}
+          renderItem={this._renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+
+      )
+      
   }
   
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-    },
-    header: {
-      fontSize: 30,
-      paddingBottom: 20
-    },
-    card: {
-      backgroundColor: '#4286f4',
-      width: '100%',
-      marginBottom: 10,
-      marginTop: 10,
-      padding: 40,
-      borderRadius: 10
-    }
-  });
+}
   
-  const blue = '#4286f4'
-  const grey = '#808080'
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  noCardsContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});
   
-  const mapStateToProps = (state) => {
-    return {
-        decks: state.decks  
-    };
+const mapStateToProps = (state) => {
+  return {
+      decks: state.decks  
   };
+};
 
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      getDecksFromStorage: () => dispatch(getDecksFromStorage()),
-      deleteAllDecksFromStorage: () => dispatch(deleteAllDecksFromStorage())
-    }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getDecksFromStorage: () => dispatch(getDecksFromStorage())
   }
-
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
   

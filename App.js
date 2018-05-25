@@ -1,6 +1,4 @@
 import React from 'react'
-import { StyleSheet, StatusBar, Text, View, FlatList, TouchableOpacity } from 'react-native'
-import { Constants } from 'expo'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import AddDeck from './components/AddDeck'
 import DeckSummary from './components/DeckSummary'
@@ -8,12 +6,13 @@ import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
-import {FontAwesome, Ionicons} from '@expo/vector-icons'
-import { createStore, applyMiddleware, compose } from 'redux'
+import { Ionicons } from '@expo/vector-icons'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { blue, grey } from './utils/colors.js'
 
 
 const store = createStore(
@@ -27,18 +26,13 @@ const store = createStore(
 export default class App extends React.Component {
   
   render() {
-      return(
-        <Provider store={store}>
-          <Tabs />
-        </Provider>
-
-      
-      )
+    return(
+      <Provider store={store}>
+        <Tabs />
+      </Provider>
+    )
   }
-
 }
-
-
 
 const DeckStack = StackNavigator({
   Decks: { 
@@ -100,7 +94,4 @@ const Tabs = TabNavigator(
       inactiveTintColor: grey
     }
   }
-);
-
-const blue = '#4286f4'
-const grey = '#808080'
+)

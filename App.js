@@ -13,6 +13,7 @@ import rootReducer from './reducers'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { blue, grey } from './utils/colors.js'
+import { setLocalNotification } from './utils/notifications'
 
 
 const store = createStore(
@@ -25,6 +26,10 @@ const store = createStore(
 
 export default class App extends React.Component {
   
+  componentDidMount(){
+    setLocalNotification()
+  }
+
   render() {
     return(
       <Provider store={store}>

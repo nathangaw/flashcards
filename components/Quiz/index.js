@@ -3,6 +3,7 @@ import { StyleSheet, StatusBar, Text, View, FlatList, TouchableOpacity, Button, 
 import { connect } from 'react-redux'
 import { saveCardToStorage } from '../../actions'
 import FlipCard from 'react-native-flip-card'
+import { setLocalNotification, clearNotifications } from '../../utils/notifications'
 
 
 
@@ -58,6 +59,7 @@ export class Quiz extends React.Component {
             numberOfCorrect: this.state.numberOfCorrect + 1
         })
         this.incrementQuestion(this.state.numberOfCorrect + 1)
+        clearNotifications().then(setLocalNotification)
     }
 
      /* have to pass state to incrementQuestion so that it is available for calculatePercentage */
@@ -66,6 +68,7 @@ export class Quiz extends React.Component {
             numberOfIncorrect: this.state.numberOfIncorrect + 1
         })
         this.incrementQuestion(this.state.numberOfCorrect)
+        clearNotifications().then(setLocalNotification)
     }
 
     calculatePercentage = (numberCorrect) => {

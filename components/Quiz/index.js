@@ -101,8 +101,10 @@ export class Quiz extends React.Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 
                 <Text>Question {this.state.questionNumber + 1} of {this.state.activeQuestions.length}</Text>
-                <Text>{this.state.activeQuestions[this.state.questionNumber].question}</Text>
                 <Text>So far {this.state.numberOfCorrect} correct and {this.state.numberOfIncorrect} incorrect</Text>
+
+                <Text>{this.state.activeQuestions[this.state.questionNumber].question}</Text>
+                
                 
                 <Button
                     onPress={() => {

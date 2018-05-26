@@ -31,18 +31,21 @@ export class DeckSummary extends React.Component {
 
         <View style={styles.card}>
           
-            <Text>{this.state.title}</Text>
-            <Text>{this.state.activeDeck[0].questions.length} cards</Text>
-            <TouchableOpacity onPress={() => {this.props.navigation.navigate('AddCard', {title: this.state.title})}}><Text>Add card</Text></TouchableOpacity>
+            <Text style={styles.title}>{this.state.title}</Text>
+            <Text style={styles.cardNumber}>Number of cards: {this.state.activeDeck[0].questions.length}</Text>
 
-            { (this.state.activeDeck[0].questions.length > 0)
+            <View style={styles.buttonWrapper}>
 
-            ? <TouchableOpacity onPress={() => {this.props.navigation.navigate('Quiz', {title: this.state.title})}}><Text>Start quiz</Text></TouchableOpacity>
-            : <Text></Text>
+                <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('AddCard', {title: this.state.title})}}><Text style={{color: '#fff'}}>Add card</Text></TouchableOpacity>
 
-            }
+                { (this.state.activeDeck[0].questions.length > 0)
 
-            
+                ? <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('Quiz', {title: this.state.title})}}><Text style={{color: '#fff'}}>Start quiz</Text></TouchableOpacity>
+                : <Text></Text>
+
+                }
+
+            </View>
 
             
              
@@ -58,21 +61,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: blue,
-        width: '100%',
-        marginBottom: 10,
-        marginTop: 10,
-        padding: 40,
-        borderRadius: 10
+        width: '100%'
     },
     title: {
         fontSize: 25,
         textAlign: 'center',
-        color: '#fff'
+        color: '#fff',
+        marginBottom: 10
     },
     cardNumber: {
         fontSize: 15,
         textAlign: 'center',
         color: '#fff'
+    },
+    buttonWrapper: {
+        flexDirection: 'row'
+    },
+    button: {
+        backgroundColor: '#696969',
+        padding: 10,
+        margin: 15
     }
   });
 

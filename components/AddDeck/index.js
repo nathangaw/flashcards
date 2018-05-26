@@ -20,7 +20,7 @@ class AddDeck extends React.Component {
         return(
 
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          
+            <Text style={{marginBottom: 20}}>Type the name of your new deck.</Text>
             <TextInput 
                 style={{width: '90%', height: 40, borderColor: 'gray', borderWidth: 1, textAlign: 'center'}}
                 onChangeText={(input) => this.setState({input: input})}

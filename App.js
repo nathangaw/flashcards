@@ -26,7 +26,7 @@ const store = createStore(
 
 export default class App extends React.Component {
   
-  componentDidMount(){
+  componentDidMount() {
     setLocalNotification()
   }
 
@@ -70,7 +70,7 @@ const addDeckStack = StackNavigator({
   AddDeck: { 
     screen: AddDeck,
     navigationOptions: {
-      title: 'Add Deck'
+      title: 'Add deck'
     }
   }
 })
@@ -88,7 +88,7 @@ const Tabs = TabNavigator(
     AddDeck: {
       screen: addDeckStack,
       navigationOptions: {
-        tabBarLabel: 'Add decks',
+        tabBarLabel: 'Add deck',
         tabBarIcon: ({ tintColor }) => <Ionicons name='ios-add' size={30} color={tintColor} />
       }
     }

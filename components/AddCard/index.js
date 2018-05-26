@@ -28,15 +28,17 @@ export class AddCard extends React.Component {
 
         return(
 
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Saving new card to {this.state.title} deck</Text>
+        <View style={styles.container}>
+            <Text style={styles.intro}>Add a new card to the {this.state.title} deck.</Text>
+            <Text>Your question</Text>
             <TextInput 
-                style={{width: '90%', height: 40, borderColor: 'gray', borderWidth: 1, textAlign: 'center'}}
+                style={styles.input}
                 onChangeText={(input) => this.setState({newQuestion: input})}
                 value={this.state.newQuestion}
             />
+            <Text>Your answer</Text>
             <TextInput 
-                style={{width: '90%', height: 40, borderColor: 'gray', borderWidth: 1, textAlign: 'center'}}
+                style={styles.input}
                 onChangeText={(input) => this.setState({newAnswer: input})}
                 value={this.state.newAnswer}
             />
@@ -47,12 +49,30 @@ export class AddCard extends React.Component {
                 title='Submit'
             />
              
-            
         </View>
         )
     }
 
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    intro: {
+        marginBottom: 20
+    },
+    input: {
+        width: '90%',
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        textAlign: 'center',
+        marginBottom: 20
+    }
+  });
 
 const mapStateToProps = (state) => {
     return {

@@ -75,7 +75,6 @@ const addDeckStack = StackNavigator({
   }
 })
 
-
 const Tabs = TabNavigator(
   {
     Decks: {

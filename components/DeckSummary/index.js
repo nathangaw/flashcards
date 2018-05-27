@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import { blue } from '../../utils/colors.js'
 
 
-
-
 export class DeckSummary extends React.Component {
 
     state = {
@@ -46,8 +44,6 @@ export class DeckSummary extends React.Component {
                 }
 
             </View>
-
-            
              
         </View>
         )

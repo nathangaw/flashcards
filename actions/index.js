@@ -18,9 +18,6 @@ export function deleteDecks() {
 	}
 }
 
-
-
-
 /* updating async storage */
 
 export const FLASHCARDS_STORAGE_KEY = 'FlashcardArray'
@@ -54,9 +51,6 @@ let initialData = [
 	}*/
 ]	
 	
-
-
-
 function initialiseStorage() {
 		AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(initialData))
 		return initialData

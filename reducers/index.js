@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 
-
 export function decks (state = [], action) {
     switch (action.type) {
         case 'GET_DECKS':
@@ -11,8 +10,6 @@ export function decks (state = [], action) {
             return state;
     }
 }
-
-
 
 export default combineReducers({
     decks

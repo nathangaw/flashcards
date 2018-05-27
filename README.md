@@ -1,4 +1,4 @@
-***Flashcards***
+**Flashcards**
 
 This app allows you to create decks of flashcards for revision or spelling practice.
 

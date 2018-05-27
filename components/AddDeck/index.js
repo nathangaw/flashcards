@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, StatusBar, Text, View, FlatList, TextInput, Button } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { saveDeckTitleToStorage } from '../../actions'
 

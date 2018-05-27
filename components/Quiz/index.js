@@ -1,11 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Button, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
 import { connect } from 'react-redux'
-import { saveCardToStorage } from '../../actions'
 import FlipCard from 'react-native-flip-card'
 import { setLocalNotification, clearNotifications } from '../../utils/notifications'
-
-
 
 
 export class Quiz extends React.Component {
@@ -29,7 +26,6 @@ export class Quiz extends React.Component {
             activeQuestions: activeDeck[0].questions
         })
     }
-
 
     /* have to pass state direct to calculatePercentage, otherwise it doesn't update in time */
     incrementQuestion = (numberCorrect) => {

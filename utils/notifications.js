@@ -8,8 +8,6 @@ export function clearNotifications() {
     .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
 
-
-
 function createNotification() {
     return {
         title: 'Don\'t forget to study!',

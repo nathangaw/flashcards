@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, StatusBar, Text, View, FlatList, TouchableOpacity, Button, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { saveCardToStorage } from '../../actions'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, StatusBar, Text, View, FlatList, TouchableOpacity, Button, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Button, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { saveCardToStorage } from '../../actions'
 import FlipCard from 'react-native-flip-card'
@@ -93,17 +93,17 @@ export class Quiz extends React.Component {
 
     render() {
 
-        
-
         return(
 
-        <FlipCard flip={this.state.flipped} clickable={false} flipHorizontal={true} flipVertical={false} friction={10} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <FlipCard flip={this.state.flipped} clickable={false} flipHorizontal={true} flipVertical={false} friction={10} style={styles.flipCard}>
+            <View style={styles.container}>
                 
-                <Text>Question {this.state.questionNumber + 1} of {this.state.activeQuestions.length}</Text>
-                <Text>So far {this.state.numberOfCorrect} correct and {this.state.numberOfIncorrect} incorrect</Text>
+                <View style={styles.header}>
+                    <Text>Question {this.state.questionNumber + 1} of {this.state.activeQuestions.length}</Text>
+                    <Text>So far {this.state.numberOfCorrect} correct and {this.state.numberOfIncorrect} incorrect</Text>
+                </View>
 
-                <Text>{this.state.activeQuestions[this.state.questionNumber].question}</Text>
+                <Text style={styles.question}>{this.state.activeQuestions[this.state.questionNumber].question}</Text>
                 
                 
                 <Button
@@ -113,8 +113,6 @@ export class Quiz extends React.Component {
                     title='See answer'
                 />
 
-                
-                
             </View>
             <View>
 
@@ -122,41 +120,46 @@ export class Quiz extends React.Component {
 
                     ?
 
-                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <View style={styles.centredContainer}>
                         <Text>And the answer is...</Text>
-                        <Text>{this.state.activeQuestions[this.state.questionNumber].answer}</Text>
-                        <Button
-                            onPress={() => {
-                            this.incrementCorrect()
-                            }}
-                            title='I was correct'
-                        />
-                        <Button
-                            onPress={() => {
-                            this.incrementIncorrect()
-                            }}
-                            title='I was incorrect'
-                        />
+                        <Text style={styles.answer}>{this.state.activeQuestions[this.state.questionNumber].answer}</Text>
+                        <View style={styles.buttonWrapper}>
+                            <Button
+                                onPress={() => {
+                                this.incrementCorrect()
+                                }}
+                                title='I was correct'
+                            />
+                            <Button
+                                onPress={() => {
+                                this.incrementIncorrect()
+                                }}
+                                title='I was incorrect'
+                            />
+                        </View>
                     </View>
 
                     : 
                     
-                    <View>
-                        <Text>You have finished</Text>
+                    <View style={styles.centredContainer}>
+                        <Text>You have finished!</Text>
                         <Text>You got {this.state.numberOfCorrect} correct and {this.state.numberOfIncorrect} incorrect.</Text>
                         <Text>You scored {this.state.percentage}%</Text>
-                        <Button
-                            onPress={() => {
-                            this.props.navigation.goBack()
-                            }}
-                            title='Go back to deck detail'
-                        />
-                        <Button
-                            onPress={() => {
-                            this.resetQuiz()
-                            }}
-                            title='Restart quiz'
-                        />
+                        
+                        <View style={styles.completeButtons}>
+                            <Button
+                                onPress={() => {
+                                this.props.navigation.goBack()
+                                }}
+                                title='Go back to deck detail'
+                            />
+                            <Button
+                                onPress={() => {
+                                this.resetQuiz()
+                                }}
+                                title='Restart quiz'
+                            />
+                        </View>
                     </View>
 
                 }
@@ -167,13 +170,47 @@ export class Quiz extends React.Component {
 
 }
 
+const styles = StyleSheet.create({
+    flipCard: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    header: {
+        alignItems: 'center',
+        marginTop: 20
+    },
+    question: {
+        fontSize: 20,
+        marginTop: 220
+    },
+    centredContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    answer: {
+        fontSize: 20,
+        marginTop: 20
+    },
+    buttonWrapper: {
+        flexDirection: 'row',
+        marginTop: 20
+    },
+    completeButtons: {
+        marginTop: 20
+    }
+  });
+
+
 const mapStateToProps = (state) => {
     return {
         decks: state.decks  
     };
   };
-
-  
-
 
 export default connect(mapStateToProps)(Quiz);
